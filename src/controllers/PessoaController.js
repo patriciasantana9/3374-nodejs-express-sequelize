@@ -1,16 +1,12 @@
-const database = require('../models');
-//dentro de models, tem um index.js, que é o chamado aqui; ele gerencia todos os models
+const Controller = require('./Controller.js');
+const PessoaServices = require('../services/PessoaServices.js');
 
-class PessoaController {
-  static async pegaTodas(req, res){
-    try {
-      //o método Pessoa que é gerenciado no index.js de models; todos os métodos do sequelize podem ser usados para interagir com o banco; o método Pessoa disponibiliza o findAll();
-      const listaDePessoas = await database.Pessoa.findAll();
-      return res.status(200).json(listaDePessoas);
-    } catch (error) {
-      //erro
-    }
+const pessoaService = new PessoaServices();
+
+class PessoaController extends Controller {
+  constructor(){
+    super(pessoaService);
   }
 }
 
-module.export = PessoaController;
+module.exports = PessoaController;
