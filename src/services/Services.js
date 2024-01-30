@@ -1,4 +1,4 @@
-const dataSource = require('../models');
+const dataSource = require('../database/models');
 //dentro de models, tem um index.js, que é o chamado aqui; ele gerencia todos os models; métodos que se conectam com o banco
 
 class Services {
