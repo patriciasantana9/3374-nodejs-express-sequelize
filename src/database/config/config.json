@@ -1,7 +1,7 @@
 {
   "development": {
     "dialect": "sqlite",
-    "storage": "./sequelize/3374-nodejs-express-sequelize/src/database/storage/database.sqlite"
+    "storage": "./src/database/storage/database.sqlite"
   },
   "test": {
     "username": "root",
