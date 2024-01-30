@@ -3,6 +3,7 @@ class Controller {
     this.entidadeService = entidadeService;
   }
 
+  //requisição e resposta
   
   //pegar o registro de qualquer controller
   async pegaTodos(req, res){

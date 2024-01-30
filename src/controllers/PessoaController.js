@@ -1,11 +1,21 @@
 const Controller = require('./Controller.js');
 const PessoaServices = require('../services/PessoaServices.js');
 
-const pessoaService = new PessoaServices();
+const pessoaServices = new PessoaServices();
 
 class PessoaController extends Controller {
   constructor(){
-    super(pessoaService);
+    super(pessoaServices);
+  }
+
+  async pegaMatricula(req, res){
+    const { estudanteId } = req.params;
+    try {
+      const listaMatriculas = await pessoaServices.pegaMatriculasPorEstudante(Number(estudanteId));
+      return res.status(200).json(listaMatriculas);
+    } catch (error) {
+      //error
+    }
   }
 }
 
