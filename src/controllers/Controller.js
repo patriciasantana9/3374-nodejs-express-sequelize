@@ -29,7 +29,8 @@ class Controller {
   }
 
   async pegaUm(req, res) {
-    const { ...params } = req.params; /**tudo o que vier de params */
+    const { ...params } = req.params; /**tudo o que vier de params (de /matricula/id) */
+    console.log(params);
     const where = converteIds(params);
     try {
       const umRegistro = await this.entidadeService.pegaUmRegistro(where);
@@ -66,10 +67,11 @@ class Controller {
   }
 
   async exclui(req, res) {
-    const { id } = req.params;
+    const { ...params } = req.params;
+    const where = converteIds(params);
     try {
-      await this.entidadeService.excluiRegistro(Number(id));
-      return res.status(200).json({ mensagem: `id ${id} deletado` });
+      await this.entidadeService.excluiRegistro(where);
+      return res.status(200).json({ mensagem: `id ${where} deletado` });
     } catch (error) {
       return res.status(500).json({ erro: error.message} );
     }

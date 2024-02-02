@@ -19,7 +19,7 @@ class Services {
     return dataSource[this.model].findByPk(id);
   }
 
-  async pegaUmRegistro(where) { /**receberá um valor e ele será espalhado dentro do valor da propriedade where */
+  async pegaUmRegistro(where) { /**receberá um valor e ele será espalhado dentro do valor da propriedade where (de /matricula/id) */
     return dataSource[this.model].findOne({ where: {...where} });
   }
 
@@ -38,8 +38,8 @@ class Services {
     return true;
   }
 
-  async excluiRegistro(id) {
-    return dataSource[this.model].destroy({ where: { id: id } });
+  async excluiRegistro(where) {
+    return dataSource[this.model].destroy({ where: { ...where } });
   }
 }
 
