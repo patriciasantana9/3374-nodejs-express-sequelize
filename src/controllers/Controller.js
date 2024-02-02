@@ -1,3 +1,5 @@
+const converteIds = require('../utils/conversorDeStringHelper.js'); /**converte os id recebidos em string para Number */
+
 class Controller {
   constructor(entidadeService){
     this.entidadeService = entidadeService;
@@ -12,7 +14,7 @@ class Controller {
       const listaDeRegistro = await this.entidadeService.pegaTodosOsRegistros();
       return res.status(200).json(listaDeRegistro);  
     } catch(error) {
-      //return res.status(500).json({ erro: error.message});
+      return res.status(500).json({ erro: error.message});
     }
   }
 
@@ -22,17 +24,18 @@ class Controller {
       const umRegistro = await this.entidadeService.pegaUmRegistroPorId(Number(id));
       return res.status(200).json(umRegistro);
     } catch (error) {
-      //return res.status(500).json({ erro: error.message});
+      return res.status(500).json({ erro: error.message});
     }
   }
 
   async pegaUm(req, res) {
     const { ...params } = req.params; /**tudo o que vier de params */
+    const where = converteIds(params);
     try {
-      const umRegistro = await this.entidadeService.pegaUmRegistro(params);
+      const umRegistro = await this.entidadeService.pegaUmRegistro(where);
       return res.status(200).json(umRegistro);
     } catch (error) {
-      //return res.status(500).json({ erro: error.message});
+      return res.status(500).json({ erro: error.message});
     }
   }
 
@@ -42,7 +45,7 @@ class Controller {
       const novoRegistroCriado = await this.entidadeService.criaRegistro(dadosParaCriacao);
       return res.status(200).json(novoRegistroCriado);
     } catch (error) {
-      //return res.status(500).json({ erro: error.message});
+      return res.status(500).json({ erro: error.message});
     }
   }
 
@@ -57,7 +60,7 @@ class Controller {
       }
       return res.status(200).json({ mensagem: 'Registro atualizado com sucesso.'});  
     } catch (error) {
-      //return res.status(500).json({ erro: error.message});
+      return res.status(500).json({ erro: error.message});
     }
   }
 
@@ -67,7 +70,7 @@ class Controller {
       await this.entidadeService.excluiRegistro(Number(id));
       return res.status(200).json({ mensagem: `id ${id} deletado` });
     } catch (error) {
-      //return res.status(500).json({ erro: error.message} );
+      return res.status(500).json({ erro: error.message} );
     }
   }
 }
