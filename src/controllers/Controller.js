@@ -1,4 +1,3 @@
-const { where } = require('sequelize');
 const converteIds = require('../utils/conversorDeStringHelper.js'); /**converte os id recebidos em string para Number */
 
 class Controller {
