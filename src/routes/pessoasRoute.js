@@ -9,13 +9,16 @@ const router = Router();
 
 //rotaGet(caminho, acao.metodoDaAcao)
 router.get('/pessoas', (req, res) => pessoaController.pegaTodos(req, res));
+router.get('/pessoas/todos', (req, res) => pessoaController.pegaTodasAsPessoas(req, res));
 router.get('/pessoas/:id', (req, res) => pessoaController.pegaUmPorId(req, res));
 router.post('/pessoas', (req, res) => pessoaController.criaNovo(req, res));
 router.put('/pessoas/:id', (req, res) => pessoaController.atualiza(req, res));
 router.delete('/pessoas/:id', (req, res) => pessoaController.exclui(req, res));
-router.get('/pessoas/:estudanteId/matriculas', (req, res) => pessoaController.pegaMatricula(req, res));
-
 //a matrícula só precisa ser acessada a partir de uma pessoa ou curso específico, não precisa de uma rota inteira pra si
+router.get('/pessoas/:estudanteId/matriculas', (req, res) => pessoaController.pegaMatriculasAtivas(req, res));
+router.get('/pessoas/:estudanteId/matriculas/todos', (req, res) => pessoaController.pegaTodasAsMatriculas(req, res));
+router.get('/pessoas/:estudanteId/matriculas/:id', (req, res) => pessoaController.pegaUm(req, res));
+//criar nova matrícula
 router.post('/pessoas/:estudanteId/matriculas', (req, res) => matriculaController.criaNovo(req, res));
 
 module.exports = router;
