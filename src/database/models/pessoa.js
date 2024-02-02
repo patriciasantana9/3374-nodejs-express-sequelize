@@ -12,12 +12,12 @@ module.exports = (sequelize, DataTypes) => {
       });
       Pessoa.hasMany(models.Matricula, {
         foreignKey: 'estudante_id',
-        scope: { status: 'matriculado' },
+        scope: { status: 'matriculado' }, /* escopo de associação */
         as: 'aulasMatriculadas'
       }); /**para exibir todas as matrículas, escopo geral; precisa de nova rota também e controlador da rota */
       Pessoa.hasMany(models.Matricula, {
         foreignKey: 'estudante_id',
-        as: 'todasAsMatriculas'
+        as: 'todasAsMatriculas' /* outro escopo de associação */
       });
     }
   }
@@ -57,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Pessoa',
     tableName: 'pessoas',
     paranoid: true,
-    defaultScope: {
+    defaultScope: { /* escopo de modelo */
       where: {
         ativo: true,
       }
