@@ -14,11 +14,18 @@ router.get('/pessoas/:id', (req, res) => pessoaController.pegaUmPorId(req, res))
 router.post('/pessoas', (req, res) => pessoaController.criaNovo(req, res));
 router.put('/pessoas/:id', (req, res) => pessoaController.atualiza(req, res));
 router.delete('/pessoas/:id', (req, res) => pessoaController.exclui(req, res));
-//a matrícula só precisa ser acessada a partir de uma pessoa ou curso específico, não precisa de uma rota inteira pra si
-router.get('/pessoas/:estudanteId/matriculas', (req, res) => pessoaController.pegaMatriculasAtivas(req, res));
-router.get('/pessoas/:estudanteId/matriculas/todos', (req, res) => pessoaController.pegaTodasAsMatriculas(req, res));
-router.get('/pessoas/:estudanteId/matriculas/:id', (req, res) => pessoaController.pegaUm(req, res));
+/*
+*a matrícula só precisa ser acessada a partir de uma pessoa ou curso específico, não precisa de uma rota inteira pra si
+*pegar as matriculas ativas do estudante
+*/
+router.get('/pessoas/:estudante_id/matriculas', (req, res) => pessoaController.pegaMatriculasAtivas(req, res));
+/**pegar todas as matrículas de determinado estudante */
+router.get('/pessoas/:estudante_id/matriculas/todos', (req, res) => pessoaController.pegaTodasAsMatriculas(req, res));
+/**pegar matrícula pelo id da matrícula */
+router.get('/pessoas/:estudante_id/matriculas/:id', (req, res) => matriculaController.pegaUm(req, res));
 //criar nova matrícula
-router.post('/pessoas/:estudanteId/matriculas', (req, res) => matriculaController.criaNovo(req, res));
+router.post('/pessoas/:estudante_id/matriculas', (req, res) => matriculaController.criaNovo(req, res));
+router.put('/pessoas/:estudante_id/matriculas/:id', (req, res) => matriculaController.atualiza(req, res));
+router.delete('/pessoas/:estudante_id/matriculas/:id', (req, res) => matriculaController.exclui(req, res));
 
 module.exports = router;
