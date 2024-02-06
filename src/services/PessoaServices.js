@@ -3,6 +3,7 @@ const Services = require('./Services.js');
 class PessoaServices extends Services {
   constructor(){
     super('Pessoa'); //Pessoa faz o papel de database.findAll()
+    this.matriculaServices = new Services('Matricula'); /**recuperar os modelos de Matricula */
   }
   //método exclusivo de PessoaServices, que irá pegar as matrículas de acordo com o id do estudante
   //o id é recebido do controller
@@ -27,6 +28,11 @@ class PessoaServices extends Services {
     return listaPessoas;
   }
 
+  async cancelaPessoaEMatriculas(estudante_id){
+    //                            o que será atualizado, onde será atualizado
+    await super.atualizaRegistro({ ativo: false }, { id: estudante_id });
+    await this.matriculaServices.atualizaRegistro({ status: 'cancelado'}, {estudante_id: estudante_id});
+  }
 }
 
 module.exports = PessoaServices;
