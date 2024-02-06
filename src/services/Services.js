@@ -6,8 +6,8 @@ class Services {
     this.model = nomeDoModel;
   }
 
-  async pegaTodosOsRegistros(){
-    return dataSource[this.model].findAll();
+  async pegaTodosOsRegistros(where = {}){
+    return dataSource[this.model].findAll({ where: {...where} });
   }
 
   //esse método poga o escopo enviado por parâmetro; pode servir para qualquer escopo, qualquer modelo
@@ -21,6 +21,11 @@ class Services {
 
   async pegaUmRegistro(where) { /**receberá um valor e ele será espalhado dentro do valor da propriedade where (de /matricula/id) */
     return dataSource[this.model].findOne({ where: {...where} });
+  }
+
+  //contar quantidade de matrículas por estudante
+  async pegaEContaRegistros(options) {
+    return dataSource[this.model].findAndCountAll({ ...options });
   }
 
   async criaRegistro(dadosDoRegistro) {
